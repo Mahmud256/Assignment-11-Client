@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 
-const FAQ = ({ faqData }) => {
+const Faq = ({ faqData }) => {
   const [expanded, setExpanded] = useState(null);
 
   const toggleFAQ = (index) => {
@@ -33,4 +34,4 @@ const FAQ = ({ faqData }) => {
   );
 };
 
-export default FAQ;
+export default Faq;

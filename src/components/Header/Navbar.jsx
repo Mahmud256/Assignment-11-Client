@@ -5,9 +5,7 @@ import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
 
 const Navbar = () => {
-
     const { user, logOut } = useContext(AuthContext);
-    console.log(user);
 
     const handleLogOut = () => {
         logOut()
@@ -50,9 +48,7 @@ const Navbar = () => {
         <nav className="py-4 px-7 flex justify-between items-center">
             {/* Left Side: Logo */}
             <Link to="/" className="flex items-center">
-
-                <h2 className='text-lg font-bold'>Group-Study Assignment</h2>
-
+                <h2 className='text-lg font-bold'>Group Study Assignment</h2>
             </Link>
 
             {/* Middle Section: Navigation Links */}
@@ -61,27 +57,20 @@ const Navbar = () => {
                     <ul className="menu gap-2 menu-horizontal px-1">
                         {navLinks}
                         {user ? (
-                            <>
-                                <div className='flex flex-col gap-2 items-center'>
+                            <div className="group relative">
+                                <div className='flex items-center group-hover:bg-gray-200 cursor-pointer rounded-full p-2'>
                                     <div className="avatar">
-                                        <div className="w-12 rounded-full relative">
-                                            <div className="group">
-                                                <img className='im w-[25px] transition-opacity duration-300 opacity-100 group-hover:opacity-0' src={user.photoURL} alt="" />
-                                                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 text-white rounded-md py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                    {user.displayName}
-                                                </div>
-                                            </div>
+                                        <div className="w-12 rounded-full">
+                                            <img className='im w-[25px]' src={user.photoURL} alt="" />
                                         </div>
                                     </div>
-                                    <h2>{user.displayName}</h2>
+                                    <div className="hidden group-hover:block mt-2 p-2 space-y-2">
+                                        <h2 className="user-name">{user.displayName}</h2>
+                                        <button onClick={handleLogOut} className="w-full text-center font-bold hover:text-red-500">Logout</button>
+                                    </div>
                                 </div>
 
-
-
-
-
-                                <li><h2 onClick={handleLogOut} className="">Logout</h2></li>
-                            </>
+                            </div>
                         ) : (
                             <>
                                 <li>
@@ -124,17 +113,20 @@ const Navbar = () => {
                         <ul className='menu'>
                             {navLinks}
                             {user ? (
-                                <>
-                                    <div className='flex flex-col items-center'>
+                                <div className="group relative">
+                                    <div className='flex flex-col items-center group-hover:bg-gray-200 cursor-pointer rounded-full p-2'>
                                         <div className="avatar">
                                             <div className="w-12 rounded-full">
                                                 <img className='im w-[25px]' src={user.photoURL} alt="" />
                                             </div>
                                         </div>
-                                        <h2>{user.displayName}</h2>
+                                        <div className="hidden group-hover:block mt-2 p-2 space-y-2">
+                                            <h2 className="user-name font-extralight">{user.displayName}</h2>
+                                            <button onClick={handleLogOut} className="w-full text-center hover:text-red-500">Logout</button>
+                                        </div>
                                     </div>
-                                    <li><h2 onClick={handleLogOut} className="">Logout</h2></li>
-                                </>
+
+                                </div>
                             ) : (
                                 <>
                                     <li>

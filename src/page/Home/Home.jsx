@@ -2,8 +2,11 @@ import React from 'react';
 import Navbar from '../../components/Header/Navbar';
 import Banner from '../../components/Header/Banner';
 import Features from '../Features/Features';
-import FAQ from '../Faq/Faq';
 import FaqData from '../FAQ/FaqData';
+import Faq from '../Faq/Faq';
+import Footer from '../Footer/Footer';
+
+
 
 const Home = () => {
     const faqData = FaqData();
@@ -12,8 +15,8 @@ const Home = () => {
             <Navbar></Navbar>
             <Banner></Banner>
             <Features></Features>
-            <FAQ faqData={faqData} />
-            <h2>This</h2>
+            <Faq faqData={faqData} />
+            <Footer></Footer>
         </div>
     );
 };
