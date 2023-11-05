@@ -40,17 +40,19 @@ const Navbar = () => {
 
     const navLinks = <>
         <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/about">About</NavLink></li>
-        <li><NavLink to="/services">Services</NavLink></li>
-        <li><NavLink to="/blog">Blog</NavLink></li>
-        <li><NavLink to="/contact">Contact</NavLink></li>
+        <li><NavLink to="/assignments">Assignments</NavLink></li>
+        <li><NavLink to="/create">Create Assignments</NavLink></li>
+        <li><NavLink to="/my">My Assignments</NavLink></li>
+        <li><NavLink to="/submitted">Submitted Assignments</NavLink></li>
     </>
 
     return (
         <nav className="py-4 px-7 flex justify-between items-center">
             {/* Left Side: Logo */}
             <Link to="/" className="flex items-center">
-                <h2>Logo</h2>
+
+                <h2 className='text-lg font-bold'>Group-Study Assignment</h2>
+
             </Link>
 
             {/* Middle Section: Navigation Links */}
@@ -62,12 +64,22 @@ const Navbar = () => {
                             <>
                                 <div className='flex flex-col gap-2 items-center'>
                                     <div className="avatar">
-                                        <div className="w-12 rounded-full">
-                                            <img className='im w-[25px]' src={user.photoURL} alt="" />
+                                        <div className="w-12 rounded-full relative">
+                                            <div className="group">
+                                                <img className='im w-[25px] transition-opacity duration-300 opacity-100 group-hover:opacity-0' src={user.photoURL} alt="" />
+                                                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 text-white rounded-md py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                    {user.displayName}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <h2>{user.displayName}</h2>
                                 </div>
+
+
+
+
+
                                 <li><h2 onClick={handleLogOut} className="">Logout</h2></li>
                             </>
                         ) : (
