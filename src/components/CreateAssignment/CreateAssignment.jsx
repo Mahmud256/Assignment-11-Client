@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Navbar from '../Header/Navbar';
-import { useState } from 'react';
-import { toast,ToastContainer  } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const CreateAssignment = () => {
-    const handleCreateAssignment = event => {
+    const [dueDate, setDueDate] = useState(new Date());
+
+    const handleCreateAssignment = (event) => {
         event.preventDefault();
 
         const form = event.target;
@@ -18,41 +19,39 @@ const CreateAssignment = () => {
         const description = form.description.value;
         const product_img = form.photo.value;
 
+        // Format the dueDate as "YYYY-MM-DD"
+        const formattedDueDate = dueDate.toISOString().split('T')[0];
 
-        const c_assignment = { title, assignmentLevel, marks, dueDate, description, product_img };
+        const c_assignment = { title, assignmentLevel, marks, dueDate: formattedDueDate, description, product_img };
         console.log(c_assignment);
 
-        //send data to the server
-
+        // Send data to the server
         fetch('http://localhost:5000/assignment', {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(c_assignment)
         })
-            .then(res => res.json())
-            .then(data => {
+            .then((res) => res.json())
+            .then((data) => {
                 console.log(data);
                 if (data.insertedId) {
-                    // toast.success('Create Assignment Success',);
                     toast.success('Create Assignment Success', {
                         position: toast.POSITION.TOP_CENTER
-                      });
+                    });
                 }
-            })
-    }
+            });
+    };
 
-    const [dueDate, setDueDate] = useState(null);
-
-    const handleDateChange = (date) => {
+    const handleDateSelect = (date) => {
         setDueDate(date);
     };
 
     return (
         <div>
-        <ToastContainer />
-            <Navbar></Navbar>
+            <ToastContainer />
+            <Navbar />
             <div className='bg-[#331f64] p-4'>
                 <div className="max-w-lg mx-auto p-4 bg-white rounded-lg shadow-lg">
                     <div className=''>
@@ -61,25 +60,46 @@ const CreateAssignment = () => {
                     <form onSubmit={handleCreateAssignment}>
                         <div className="mb-4 form-control">
                             <label className="label text-gray-700 font-bold mb-2">Photo URL:</label>
-                            <input type="url" id="photo" name="photo" className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" placeholder="Enter Photo URL" />
+                            <input
+                                type="url"
+                                id="photo"
+                                name="photo"
+                                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+                                placeholder="Enter Photo URL"
+                            />
                         </div>
                         <div className='flex gap-5'>
                             <div className='w-[50%]'>
                                 <div className="mb-4 form-control">
                                     <label className="label text-gray-700 font-bold mb-2">Assignment Title</label>
-                                    <input type="text" name="title" className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" placeholder="Enter Assignment Title" />
+                                    <input
+                                        type="text"
+                                        name="title"
+                                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+                                        placeholder="Enter Assignment Title"
+                                    />
                                 </div>
 
                                 <div className="mb-4 form-control">
                                     <label className="label text-gray-700 font-bold mb-2">Assignment Marks</label>
-                                    <input type="number" id="marks" name="marks" className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" placeholder="Enter Assignment Marks" />
+                                    <input
+                                        type="number"
+                                        id="marks"
+                                        name="marks"
+                                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+                                        placeholder="Enter Assignment Marks"
+                                    />
                                 </div>
                             </div>
 
                             <div className='w-[50%]'>
                                 <div className="mb-4 form-control">
                                     <label className="label text-gray-700 font-bold mb-2">Assignment Level</label>
-                                    <select id="assignmentLevel" name="assignmentLevel" className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300">
+                                    <select
+                                        id="assignmentLevel"
+                                        name="assignmentLevel"
+                                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+                                    >
                                         <option value="easy">Easy</option>
                                         <option value="medium">Medium</option>
                                         <option value="hard">Hard</option>
@@ -90,7 +110,9 @@ const CreateAssignment = () => {
                                     <label className="label text-gray-700 font-bold mb-2">Assignment Due Date</label>
                                     <DatePicker
                                         selected={dueDate}
-                                        onChange={handleDateChange}
+                                        onChange={handleDateSelect}
+                                        dateFormat='dd/MM/yyyy'
+                                        showTimeSelect={false}
                                         className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
                                         placeholderText="Select Due Date"
                                     />
@@ -100,10 +122,19 @@ const CreateAssignment = () => {
 
                         <div className="mb-4 form-control">
                             <label className="label text-gray-700 font-bold mb-2">Description:</label>
-                            <textarea id="description" name="description" className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" placeholder="Enter Short Description"></textarea>
+                            <textarea
+                                id="description"
+                                name="description"
+                                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+                                placeholder="Enter Short Description"
+                            ></textarea>
                         </div>
 
-                        <input type="submit" value="Create Assignment" className="btn btn-block bg-yellow-700 hover:bg-green-700 text-white" />
+                        <input
+                            type="submit"
+                            value="Create Assignment"
+                            className="btn btn-block bg-yellow-700 hover:bg-green-700 text-white"
+                        />
                     </form>
                 </div>
             </div>

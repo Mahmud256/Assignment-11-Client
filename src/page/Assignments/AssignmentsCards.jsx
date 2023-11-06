@@ -22,14 +22,14 @@ const AssignmentsCards = ({ assignment }) => {
                         Marks: {marks}
                     </h2>
 
-                    <div className="card-actions justify-start">
-                    <Link to={`/details/${_id}`}>
-                        <button className="btn bg-green-700 hover:bg-green-700 normal-case text-lg font-semibold text-[#fff]"> View Details</button>
+                    <div className="card-actions justify-center">
+                        <Link to={`/details/${_id}`}>
+                            <button className="btn bg-green-700 hover:bg-green-700 normal-case text-lg font-semibold text-[#fff]"> View Assignment</button>
                         </Link>
 
-                    <Link to={`/updateproduct/${_id}`}>
-                    <button className="btn bg-orange-600 hover:bg-orange-600 normal-case text-lg font-semibold text-[#fff]">Update</button>
-                    </Link>
+                        <Link to={`/updateassignment/${_id}`}>
+                            <button className="btn bg-orange-600 hover:bg-orange-600 normal-case text-lg font-semibold text-[#fff]">Update Assignment</button>
+                        </Link>
                     </div>
                 </div>
             </div>
