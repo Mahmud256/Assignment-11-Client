@@ -38,7 +38,7 @@ const router = createBrowserRouter([
             {
                 path: "/assignments",
                 element: <PrivateRoute><Assignments></Assignments></PrivateRoute>,
-                loader: () => fetch("http://localhost:5000/assignments"),
+                loader: () => fetch("http://localhost:5000/assignment"),
               },
         ]
     },
