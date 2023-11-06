@@ -9,6 +9,7 @@ import PrivateRoute from "./PrivateRoute";
 import Assignments from "../page/Assignments/Assignments";
 import ErrorPage from "../page/ErrorPage/ErrorPage";
 import Details from "../page/Details/Details";
+import UpdateAssignment from "../components/UpdateAssignment/UpdateAssignment";
 
 const router = createBrowserRouter([
     {
@@ -45,12 +46,12 @@ const router = createBrowserRouter([
                 path: '/details/:_id',
                 element: <PrivateRoute><Details></Details></PrivateRoute>,
                 loader: () => fetch('http://localhost:5000/assignment')
+            },
+            {
+                path: '/updateassignment/:id',
+                element: <PrivateRoute><UpdateAssignment></UpdateAssignment></PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/assignment/${params.id}`)
             }
-            // {
-            //     path: '/updateproduct/:id',
-            //     element: <PrivateRoute><UpdateProduct></UpdateProduct></PrivateRoute>,
-            //     loader: ({ params }) => fetch(`https://assignment-10-server-side-vert.vercel.app/product/${params.id}`)
-            // }
         ]
     },
 ]);
