@@ -7,11 +7,13 @@ import Register from "../page/Register/Register";
 import CreateAssignment from "../components/CreateAssignment/CreateAssignment";
 import PrivateRoute from "./PrivateRoute";
 import Assignments from "../page/Assignments/Assignments";
+import ErrorPage from "../page/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Layout></Layout>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: "/",
