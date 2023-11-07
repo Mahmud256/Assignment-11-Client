@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Navbar from '../Header/Navbar';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const CreateAssignment = () => {
     const [dueDate, setDueDate] = useState(new Date());
+    const { user } = useContext(AuthContext);
 
     const handleCreateAssignment = (event) => {
         event.preventDefault();
@@ -26,12 +28,15 @@ const CreateAssignment = () => {
         console.log(c_assignment);
 
         // Send data to the server
-        fetch('http://localhost:5000/assignment', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(c_assignment)
+        const userEmail = user?.email;
+
+        // Make the POST request with 'userEmail' as a query parameter
+        fetch('http://localhost:5000/assignment?email=' + userEmail, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(c_assignment), // 'assignmentData' should contain your assignment data
         })
             .then((res) => res.json())
             .then((data) => {

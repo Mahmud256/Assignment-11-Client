@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const AssignmentsCards = ({ assignment }) => {
+const AssignmentsCards = ({ assignment, handleRemove }) => {
     const { _id, title, marks, assignmentLevel, product_img } = assignment || {};
 
     return (
@@ -30,6 +30,8 @@ const AssignmentsCards = ({ assignment }) => {
                         <Link to={`/updateassignment/${_id}`}>
                             <button className="btn bg-orange-600 hover:bg-orange-600 normal-case text-lg font-semibold text-[#fff]">Update Assignment</button>
                         </Link>
+
+                        <button onClick={() => handleRemove(_id)} className="btn bg-red-600 hover:bg-yellow-600 normal-case text-lg font-semibold text-[#fff]">Remove Assignment</button>
                     </div>
                 </div>
             </div>

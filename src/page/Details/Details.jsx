@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLoaderData, useParams } from 'react-router-dom';
 import DetailsCard from './DetailsCard';
+import Footer from '../Footer/Footer';
+import Navbar from '../../components/Header/Navbar';
 
 const Details = () => {
     const details = useLoaderData();
@@ -14,9 +16,11 @@ const Details = () => {
 
     return (
         <div>
+            <Navbar></Navbar>
             {
                 <DetailsCard assignment={assignment} ></DetailsCard>
             }
+            <Footer></Footer>
         </div>
     );
 };
