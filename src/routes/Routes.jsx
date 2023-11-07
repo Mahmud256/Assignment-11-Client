@@ -11,6 +11,7 @@ import ErrorPage from "../page/ErrorPage/ErrorPage";
 import Details from "../page/Details/Details";
 import UpdateAssignment from "../components/UpdateAssignment/UpdateAssignment";
 import SubmissionForm from "../page/SubmissionForm/SubmissionForm";
+import Submitted from "../page/SubmittedAssignment/Submitted";
 
 const router = createBrowserRouter([
     {
@@ -57,6 +58,11 @@ const router = createBrowserRouter([
                 path: 'subform/:id',
                 element: <PrivateRoute><SubmissionForm></SubmissionForm></PrivateRoute>,
                 loader: ({params}) => fetch(`http://localhost:5000/assignment/${params.id}`)
+            },
+            {
+                path: '/submitted',
+                element: <PrivateRoute><Submitted></Submitted></PrivateRoute>
+                // loader: ({params}) => fetch(`http://localhost:5000/assignment/${params.id}`)
             }
         ]
     },
