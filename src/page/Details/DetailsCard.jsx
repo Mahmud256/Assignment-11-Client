@@ -1,32 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 const DetailsCard = ({ assignment }) => {
     const { _id, title, assignmentLevel, marks, dueDate, description, product_img } = assignment || {};
-
-    const handleAddSubmitted = event => {
-        event.preventDefault();
-
-        fetch('https://assignment-10-server-side-vert.vercel.app/cart', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(cartProduct)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                if (data.insertedId) {
-                    Swal.fire(
-                        'Product Add Success',
-                        'You clicked the button!',
-                        'success'
-                    )
-                }
-            })
-    };
 
 
     return (
@@ -48,18 +25,20 @@ const DetailsCard = ({ assignment }) => {
                         </div>
                     </div>
                     <div className="card-actions justify-start relative">
-                        <button onClick={handleAddSubmitted}
-                            className="btn bg-green-600 border-none normal-case text-xl font-semibold text-[#fff]">
-                            Take assignment</button>
-                    </div>
-                </div>
-
-                <div className="cardbody w-330px lg:w-[730px] pb-10">
-                    <h2 className="card-title text-2xl lg:text-4xl font-bold pb-3 capitalize">{title}</h2>
-                    <p className='text-base'>{description}</p>
+                        <Link to={`/subform/${_id}`}>
+                        <button className="btn bg-green-600 border-none normal-case text-xl font-semibold text-[#fff]">
+                            Take assignment
+                        </button>
+                    </Link>
                 </div>
             </div>
+
+            <div className="cardbody w-330px lg:w-[730px] pb-10">
+                <h2 className="card-title text-2xl lg:text-4xl font-bold pb-3 capitalize">{title}</h2>
+                <p className='text-base'>{description}</p>
+            </div>
         </div>
+        </div >
     );
 };
 

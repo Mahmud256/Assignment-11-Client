@@ -10,6 +10,7 @@ import Assignments from "../page/Assignments/Assignments";
 import ErrorPage from "../page/ErrorPage/ErrorPage";
 import Details from "../page/Details/Details";
 import UpdateAssignment from "../components/UpdateAssignment/UpdateAssignment";
+import SubmissionForm from "../page/SubmissionForm/SubmissionForm";
 
 const router = createBrowserRouter([
     {
@@ -51,6 +52,11 @@ const router = createBrowserRouter([
                 path: '/updateassignment/:id',
                 element: <PrivateRoute><UpdateAssignment></UpdateAssignment></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/assignment/${params.id}`)
+            },
+            {
+                path: 'subform/:id',
+                element: <PrivateRoute><SubmissionForm></SubmissionForm></PrivateRoute>,
+                loader: ({params}) => fetch(`http://localhost:5000/assignment/${params.id}`)
             }
         ]
     },
