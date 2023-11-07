@@ -8,7 +8,7 @@ const UpdateAssignment = () => {
     const [dueDate, setDueDate] = useState(new Date());
 
     const assignment = useLoaderData();
-    const { _id, title, assignmentLevel, marks, dueDate: formattedDueDate, description, product_img } = assignment;
+    const { _id, title, assignmentLevel, marks, dueDate: formattedDueDate, description, product_img } = assignment || {};
 
     const handleUpdateAssignment = (event) => {
         event.preventDefault();

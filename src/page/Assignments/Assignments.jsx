@@ -54,6 +54,10 @@ const Assignments = () => {
         }
     }
 
+    const handleDifficultyChange = (event) => {
+        setSelectedDifficulty(event.target.value);
+    }
+
     const filteredAssignments = assignments.filter((assignment) => {
         if (selectedDifficulty === 'all') {
             return true;
@@ -66,12 +70,25 @@ const Assignments = () => {
         <div>
             <Navbar />
             <div className='max-w-[1300px] mx-auto'>
-                <div className="text-center mt-4 flex justify-center gap-5">
-                    <button onClick={() => setSelectedDifficulty('all')} className="btn">All Assignments</button>
-                    <button onClick={() => setSelectedDifficulty('easy')} className="btn ">Easy Assignments</button>
-                    <button onClick={() => setSelectedDifficulty('medium')} className="btn ">Medium Assignments</button>
-                    <button onClick={() => setSelectedDifficulty('hard')} className="btn ">Hard Assignments</button>
+
+                {/* Input field for selecting difficulty level */}
+                <div className="text-center mt-4 flex flex-col items-center">
+                    <label htmlFor="difficultySelect" className="block text-gray-700 text-sm font-bold mb-2">
+                        Select Difficulty:
+                    </label>
+                    <select
+                        id="difficultySelect"
+                        value={selectedDifficulty}
+                        onChange={handleDifficultyChange}
+                        className="w-40 p-2 border rounded-md shadow-sm focus:ring focus:ring-indigo-300 focus:outline-none text-gray-700"
+                    >
+                        <option value="all">All</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
                 </div>
+
                 {filteredAssignments.length > 0 ? (
                     <div className="flex justify-around py-12">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
