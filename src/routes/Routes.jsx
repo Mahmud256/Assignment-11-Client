@@ -13,6 +13,7 @@ import UpdateAssignment from "../components/UpdateAssignment/UpdateAssignment";
 import SubmissionForm from "../page/SubmissionForm/SubmissionForm";
 import Submitted from "../page/SubmittedAssignment/Submitted";
 import MyAssignment from "../page/MyAssignment/MyAssignment";
+import About from "../page/About/About";
 
 const router = createBrowserRouter([
     {
@@ -68,6 +69,11 @@ const router = createBrowserRouter([
             {
                 path: '/my',
                 element: <PrivateRoute><MyAssignment></MyAssignment></PrivateRoute>
+                //loader: () => fetch('https://assignment-11-server-six-mocha.vercel.app/assignment')
+            },
+            {
+                path: '/about',
+                element: <About></About>
                 //loader: () => fetch('https://assignment-11-server-six-mocha.vercel.app/assignment')
             }
         ]
