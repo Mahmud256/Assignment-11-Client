@@ -5,6 +5,7 @@ import MyAssignmentCards from './MyAssignmentCard';
 import Navbar from '../../components/Header/Navbar';
 import Pagination from '../Pagination/Pagination';
 import Swal from 'sweetalert2';
+import Footer from '../Footer/Footer';
 
 const MyAssignment = () => {
     const { user } = useContext(AuthContext);
@@ -126,7 +127,7 @@ const MyAssignment = () => {
                 currentPage={currentPage}
                 onPageChange={handlePageChange}
             />
-
+            <Footer />
         </div>
     );
 };
