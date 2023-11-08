@@ -5,20 +5,23 @@ import { AuthContext } from '../../providers/AuthProvider';
 import Navbar from '../../components/Header/Navbar';
 import Footer from '../Footer/Footer';
 import AssignmentsCards from './AssignmentsCards';
+import Pagination from '../Pagination/Pagination';
 
 const Assignments = () => {
     const loadedAssignments = useLoaderData();
     const [assignments, setAssignments] = useState(loadedAssignments);
     const [selectedDifficulty, setSelectedDifficulty] = useState('all');
     const { user } = useContext(AuthContext);
-    const [rassignments, rsetAssignments] = useState([]);
+    //const [rassignments, rsetAssignments] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const assignmentsPerPage = 6;
 
     const url = `http://localhost:5000/assignment?email=${user?.email}`;
 
     useEffect(() => {
         fetch(url)
             .then((res) => res.json())
-            .then((data) => rsetAssignments(data))
+            .then((data) => setAssignments(data))
             .catch((error) => console.error("Error fetching data: ", error));
     }, [url]);
 
@@ -43,8 +46,8 @@ const Assignments = () => {
                         .then((data) => {
                             if (data.deletedCount > 0) {
                                 Swal.fire('Deleted!', 'Your Assignment has been deleted.', 'success');
-                                const remaining = rassignments.filter((assignment) => assignment._id !== _id);
-                                rsetAssignments(remaining);
+                                const remaining = assignments.filter((assignment) => assignment._id !== _id);
+                                setAssignments(remaining);
                             }
                         });
                 }
@@ -65,6 +68,14 @@ const Assignments = () => {
             return assignment.assignmentLevel === selectedDifficulty;
         }
     });
+
+    const indexOfLastAssignment = currentPage * assignmentsPerPage;
+    const indexOfFirstAssignment = indexOfLastAssignment - assignmentsPerPage;
+    const displayedAssignments = filteredAssignments.slice(indexOfFirstAssignment, indexOfLastAssignment);
+
+    const handlePageChange = (newPage) => {
+        setCurrentPage(newPage);
+    };
 
     return (
         <div>
@@ -92,7 +103,7 @@ const Assignments = () => {
                 {filteredAssignments.length > 0 ? (
                     <div className="flex justify-around py-12">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                            {filteredAssignments.map((assignment) => (
+                            {displayedAssignments.map((assignment) => (
                                 <AssignmentsCards
                                     key={assignment._id}
                                     assignment={assignment}
@@ -107,6 +118,12 @@ const Assignments = () => {
                     <p className="text-center h-screen flex flex-col justify-center items-center">No Data found</p>
                 )}
             </div>
+            <Pagination
+                totalAssignments={filteredAssignments.length}
+                assignmentsPerPage={assignmentsPerPage}
+                currentPage={currentPage}
+                onPageChange={handlePageChange}
+            />
             <Footer />
         </div>
     );
