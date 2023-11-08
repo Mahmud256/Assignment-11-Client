@@ -10,7 +10,7 @@ const Submitted = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const assignmentsPerPage = 6;
 
-    const url = 'http://localhost:5000/submission';
+    const url = 'https://assignment-11-server-six-mocha.vercel.app/submission';
 
 
     useEffect(() => {

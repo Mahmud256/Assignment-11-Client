@@ -16,7 +16,7 @@ const MyAssignment = () => {
     const assignmentsPerPage = 6;
 
 
-    const url = `http://localhost:5000/assignment?email=${user?.email}`;
+    const url = `https://assignment-11-server-six-mocha.vercel.app/assignment?email=${user?.email}`;
 
     useEffect(() => {
         fetch(url)
@@ -44,7 +44,7 @@ const MyAssignment = () => {
                 confirmButtonText: 'Yes, delete it!',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    fetch(`http://localhost:5000/assignment/${_id}`, {
+                    fetch(`https://assignment-11-server-six-mocha.vercel.app/assignment/${_id}`, {
                         method: 'DELETE',
                     })
                         .then((res) => res.json())

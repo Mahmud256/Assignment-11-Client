@@ -35,7 +35,7 @@ const SubmissionForm = () => {
         // Send data to the server
         const userEmail = user?.email;
 
-        fetch('http://localhost:5000/submission?email=' + userEmail, {
+        fetch('https://assignment-11-server-six-mocha.vercel.app/submission?email=' + userEmail, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

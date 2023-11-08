@@ -43,32 +43,32 @@ const router = createBrowserRouter([
             {
                 path: "/assignments",
                 element: <Assignments></Assignments>,
-                loader: () => fetch("http://localhost:5000/assignment")
+                loader: () => fetch("https://assignment-11-server-six-mocha.vercel.app/assignment")
             },
             {
                 path: '/details/:_id',
                 element: <PrivateRoute><Details></Details></PrivateRoute>,
-                loader: () => fetch('http://localhost:5000/assignment')
+                loader: () => fetch('https://assignment-11-server-six-mocha.vercel.app/assignment')
             },
             {
                 path: '/updateassignment/:id',
                 element: <PrivateRoute><UpdateAssignment></UpdateAssignment></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/assignment/${params.id}`)
+                loader: ({ params }) => fetch(`https://assignment-11-server-six-mocha.vercel.app/assignment/${params.id}`)
             },
             {
                 path: 'subform/:id',
                 element: <PrivateRoute><SubmissionForm></SubmissionForm></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/assignment/${params.id}`)
+                loader: ({params}) => fetch(`https://assignment-11-server-six-mocha.vercel.app/assignment/${params.id}`)
             },
             {
                 path: '/submitted',
                 element: <PrivateRoute><Submitted></Submitted></PrivateRoute>
-                // loader: ({params}) => fetch(`http://localhost:5000/assignment/${params.id}`)
+                // loader: ({params}) => fetch(`https://assignment-11-server-six-mocha.vercel.app/assignment/${params.id}`)
             },
             {
                 path: '/my',
                 element: <PrivateRoute><MyAssignment></MyAssignment></PrivateRoute>
-                //loader: () => fetch('http://localhost:5000/assignment')
+                //loader: () => fetch('https://assignment-11-server-six-mocha.vercel.app/assignment')
             }
         ]
     },

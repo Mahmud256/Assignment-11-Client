@@ -31,7 +31,7 @@ const CreateAssignment = () => {
         const userEmail = user?.email;
 
         // Make the POST request with 'userEmail' as a query parameter
-        fetch('http://localhost:5000/assignment?email=' + userEmail, {
+        fetch('https://assignment-11-server-six-mocha.vercel.app/assignment?email=' + userEmail, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
